@@ -20,7 +20,11 @@ The Snap7 Soft PLC Server is a Windows desktop application that emulates a Sieme
 ### Key Features
 - ✅ **S7 Server Emulation** - Full compatibility with S7 protocol clients
 - ✅ **Data Block Management** - Create, edit, copy, and delete data blocks
-- ✅ **Variable Management** - Define variables with different data types
+- ✅ **Advanced Variable Management** - Define variables with different data types
+- ✅ **Bit-Level Addressing** - Precise BOOL variable positioning with bit addressing
+- ✅ **Group Variable Creation** - Mass creation of variables with custom naming patterns
+- ✅ **Network Configuration** - Advanced network binding and server settings
+- ✅ **Memory Optimization** - Intelligent memory usage and conflict detection
 - ✅ **Real-time Monitoring** - View client connections and server status
 - ✅ **Persistent Configuration** - SQLite database for configuration storage
 - ✅ **Professional UI** - Intuitive Windows Forms interface
@@ -107,6 +111,8 @@ The Snap7 Soft PLC Server is a Windows desktop application that emulates a Sieme
 
 **Variable Controls:**
 - ➕ **Add Variable** - Create new variable in selected data block
+- ➕ **Add Group** - Create multiple variables at once with patterns
+- 🎯 **Bit-Aware Add** - Add BOOL variables with precise bit addressing
 - 🔄 **Update Value** - Change variable value
 - ✏️ **Edit Variable** - Modify variable properties
 - 🗑️ **Delete Variable** - Remove variable from data block
@@ -152,7 +158,7 @@ The Snap7 Soft PLC Server is a Windows desktop application that emulates a Sieme
 ## Variable Management
 
 ### Supported Data Types
-- **BOOL** - Boolean (1 byte) - `true`/`false`
+- **BOOL** - Boolean (1 bit) - `true`/`false` - Supports precise bit addressing (e.g., 5.3)
 - **BYTE** - Unsigned 8-bit (1 byte) - `0-255`
 - **WORD** - Unsigned 16-bit (2 bytes) - `0-65535`
 - **DWORD** - Unsigned 32-bit (4 bytes) - `0-4294967295`
@@ -163,14 +169,47 @@ The Snap7 Soft PLC Server is a Windows desktop application that emulates a Sieme
 
 ### Adding Variables
 
+#### Single Variable Addition
 1. **Select data block** first
 2. **Click "Add Variable"** button
 3. **Enter Details**:
    - **Name**: Variable identifier (e.g., "MotorStart")
    - **Data Type**: Select from dropdown
    - **Offset**: Byte position in data block (must not overlap)
+   - **Bit Offset**: For BOOL variables only (0-7)
    - **Comment**: Optional description
-4. **Click "OK"** to create
+4. **Click "Auto"** to automatically find next available address
+5. **Click "OK"** to create
+
+#### Bit-Aware Variable Addition
+1. **Select data block** first
+2. **Click "Add Variable"** → **"Bit-Aware Add"**
+3. **Advanced Features**:
+   - **Real-time conflict detection** - Shows conflicts as you type
+   - **Available address suggestions** - Lists all free addresses
+   - **Byte usage visualization** - See which bits are occupied
+   - **Auto-offset calculation** - Automatically finds optimal placement
+4. **Address Display**: Shows full address (e.g., "5.3" for byte 5, bit 3)
+5. **Validation**: Real-time validation with error messages
+
+#### Group Variable Addition
+1. **Select data block** first
+2. **Click "Add Variable"** → **"Add Group"**
+3. **Configure Group**:
+   - **Base Name**: Starting name for variables
+   - **Data Type**: Type for all variables in group
+   - **Count**: Number of variables to create (1-1000)
+   - **Start Offset**: Starting memory address
+   - **Auto-calculate offset**: Let system find optimal placement
+4. **Naming Patterns**:
+   - **Numbered**: Var1, Var2, Var3...
+   - **Indexed**: Var[0], Var[1], Var[2]...
+   - **Custom Pattern**: Use {BaseName}_{Index} or {BaseName}{Index1}
+5. **BOOL-Specific Options**:
+   - **Sequential bits**: Pack bits efficiently (0.0, 0.1, 0.2...)
+   - **Separate bytes**: Each BOOL gets own byte (0.0, 1.0, 2.0...)
+6. **Preview**: See all variables before creating
+7. **Validation**: Ensures no conflicts with existing variables
 
 ### Editing Variables
 
@@ -193,9 +232,12 @@ The Snap7 Soft PLC Server is a Windows desktop application that emulates a Sieme
 
 ### Variable Validation
 - ✅ **Name uniqueness** - No duplicate names in same data block
-- ✅ **Offset validation** - No overlapping memory regions
+- ✅ **Address validation** - No overlapping memory regions
+- ✅ **Bit-level conflict detection** - Prevents BOOL variable conflicts
 - ✅ **Size checking** - Variables must fit within data block
 - ✅ **Type safety** - Values validated against data type
+- ✅ **Real-time feedback** - Immediate validation with descriptive messages
+- ✅ **Memory optimization** - Suggests optimal placement for variables
 
 ---
 
@@ -297,6 +339,9 @@ client.connect('192.168.1.100', 0, 1)
 ### Performance Tips
 - 🎯 **Limit data block size** to 8KB or less for best performance
 - 🎯 **Use appropriate data types** - BOOL for simple flags, REAL for decimal values
+- 🎯 **Optimize BOOL placement** - Use sequential bit addressing for efficiency
+- 🎯 **Group similar variables** - Use group creation for better memory layout
+- 🎯 **Monitor memory usage** - Check bit and byte usage displays
 - 🎯 **Organize variables** by offset to avoid gaps in memory
 - 🎯 **Monitor client count** - Too many clients can slow performance
 
@@ -313,11 +358,18 @@ client.connect('192.168.1.100', 0, 1)
 
 **Error Messages:**
 - `Failed to start PLC: Address already in use` - Port 102 busy
+- `Failed to bind to IP address` - Invalid network configuration
 - `Error loading configuration` - Database corruption
 - `Cannot resize DB100: Variables exceed new size` - Size conflict
+- `Address X.Y conflicts with variable` - Bit-level addressing conflict
+- `No available bit addresses` - Data block memory full
+- `Variable name already exists` - Duplicate variable names
 
 ### Getting Help
 - **Application Log** - Check log panel for detailed error messages
+- **Memory Usage Display** - Real-time memory and bit usage information
+- **Address Validation** - Use bit-aware dialogs for conflict detection
+- **Network Configuration Tool** - Test binding before applying settings
 - **Database Tool** - Use DB Browser to inspect saved configuration
 - **Network Tools** - Use `netstat -an | find "102"` to check port usage
 - **Windows Event Viewer** - Check for system-level errors
@@ -326,13 +378,42 @@ client.connect('192.168.1.100', 0, 1)
 
 ## Advanced Features
 
+### Network Configuration
+- **Advanced Network Dialog** - Configure server binding and connection parameters
+- **Bind Address Options**:
+  - `0.0.0.0` - All network interfaces (default)
+  - `127.0.0.1` - Localhost only
+  - Specific IP addresses - Bind to particular network adapter
+- **Connection Parameters**:
+  - **Port**: Default 102, configurable 1-65535
+  - **Rack/Slot**: S7 addressing parameters (Rack 0, Slot 1/2)
+  - **Server Name**: Custom identification string
+- **Auto-Start**: Automatic server startup when application launches
+- **Binding Test**: Test network configuration before applying
+
+### Bit-Level Memory Management
+- **Intelligent Bit Addressing** - Optimal placement of BOOL variables
+- **Memory Usage Visualization** - Real-time display of byte and bit usage
+- **Conflict Prevention** - Advanced validation prevents memory overlaps
+- **Address Optimization** - Automatic suggestions for efficient memory use
+- **Multi-level Validation** - Byte-level and bit-level conflict detection
+
+### Group Operations
+- **Mass Variable Creation** - Create hundreds of variables efficiently
+- **Flexible Naming Patterns** - Multiple naming conventions supported
+- **Sequential Addressing** - Automatic address calculation
+- **Custom Patterns** - User-defined naming with placeholders
+- **Preview and Validation** - See results before committing changes
+
 ### Auto-Start Configuration
 - Configure PLC to start automatically when application launches
 - Useful for production environments
-- Setting saved in database
+- Setting saved in database and network configuration
 
 ### Network Security
-- Application binds to all network interfaces (0.0.0.0:102)
+- **Configurable Binding** - Control which interfaces accept connections
+- **IP Address Validation** - Ensures valid network configuration
+- **Port Configuration** - Non-standard ports for security
 - Consider network segmentation for industrial environments
 - Use Windows Firewall to restrict client connections
 
@@ -340,6 +421,7 @@ client.connect('192.168.1.100', 0, 1)
 - **Regular backups** of `plc_config.db`
 - **Export configurations** using database tools
 - **Version control** for configuration changes
+- **Memory layout preservation** - Bit-level addressing maintained across backups
 
 ---
 
