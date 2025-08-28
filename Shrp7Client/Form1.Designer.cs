@@ -97,7 +97,6 @@
             // 
             splitContainer1.Panel2.Controls.Add(grpLog);
             splitContainer1.Panel2.Controls.Add(grpVariable);
-            splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
             splitContainer1.Size = new Size(1050, 536);
             splitContainer1.SplitterDistance = 513;
             splitContainer1.TabIndex = 4;
@@ -142,6 +141,7 @@
             btnReadDataBlock.TabIndex = 6;
             btnReadDataBlock.Text = "Read";
             btnReadDataBlock.UseVisualStyleBackColor = true;
+            btnReadDataBlock.Click += btnReadDataBlock_Click;
             // 
             // numLength
             // 
@@ -187,6 +187,7 @@
             numDBNumber.Size = new Size(60, 23);
             numDBNumber.TabIndex = 1;
             numDBNumber.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numDBNumber.ValueChanged += numVarDBNumber_ValueChanged;
             // 
             // lblDBNumber
             // 
@@ -236,6 +237,7 @@
             btnDisconnect.TabIndex = 7;
             btnDisconnect.Text = "Disconnect";
             btnDisconnect.UseVisualStyleBackColor = true;
+            btnDisconnect.Click += btnDisconnect_Click;
             // 
             // btnConnect
             // 
@@ -245,6 +247,7 @@
             btnConnect.TabIndex = 6;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
             // 
             // numSlot
             // 
@@ -354,6 +357,7 @@
             btnWriteVariable.TabIndex = 12;
             btnWriteVariable.Text = "Write";
             btnWriteVariable.UseVisualStyleBackColor = true;
+            btnWriteVariable.Click += btnWriteVariable_Click;
             // 
             // btnReadVariable
             // 
@@ -364,6 +368,7 @@
             btnReadVariable.TabIndex = 11;
             btnReadVariable.Text = "Read";
             btnReadVariable.UseVisualStyleBackColor = true;
+            btnReadVariable.Click += btnReadVariable_Click;
             // 
             // txtVariableValue
             // 
@@ -390,6 +395,7 @@
             cmbVarDataType.Name = "cmbVarDataType";
             cmbVarDataType.Size = new Size(100, 23);
             cmbVarDataType.TabIndex = 8;
+            cmbVarDataType.SelectedIndexChanged += cmbVarDataType_SelectedIndexChanged;
             // 
             // lblDataType
             // 
@@ -407,6 +413,7 @@
             numVarBitOffset.Name = "numVarBitOffset";
             numVarBitOffset.Size = new Size(50, 23);
             numVarBitOffset.TabIndex = 6;
+            numVarBitOffset.ValueChanged += numVarBitOffset_ValueChanged;
             // 
             // lblBitOffset
             // 
@@ -424,6 +431,7 @@
             numVarOffset.Name = "numVarOffset";
             numVarOffset.Size = new Size(75, 23);
             numVarOffset.TabIndex = 4;
+            numVarOffset.ValueChanged += numVarOffset_ValueChanged;
             // 
             // lblOffset
             // 
@@ -443,6 +451,7 @@
             numVarDBNumber.Size = new Size(60, 23);
             numVarDBNumber.TabIndex = 2;
             numVarDBNumber.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numVarDBNumber.ValueChanged += numVarDBNumber_ValueChanged;
             // 
             // lblVarDB
             // 

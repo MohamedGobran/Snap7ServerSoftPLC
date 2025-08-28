@@ -455,9 +455,8 @@ namespace Shrp7Client
             base.OnFormClosing(e);
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
+
+
     }
 }
