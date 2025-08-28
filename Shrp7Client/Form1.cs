@@ -1,8 +1,5 @@
-using System;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using Sharp7;
+using System.Text;
 
 namespace Shrp7Client
 {
@@ -15,10 +12,10 @@ namespace Shrp7Client
         {
             InitializeComponent();
             client = new S7Client();
-            
+
             // Set default data type selection
             cmbVarDataType.SelectedIndex = 0; // BOOL
-            
+
             UpdateConnectionStatus();
         }
 
@@ -33,12 +30,12 @@ namespace Shrp7Client
                 LogMessage($"Connecting to {ip}, Rack: {rack}, Slot: {slot}...");
 
                 int result = client.ConnectTo(ip, rack, slot);
-                
+
                 if (result == 0)
                 {
                     isConnected = true;
                     LogMessage("✓ Connected successfully!");
-                    
+
                     // Get PLC info
                     var cpuInfo = new S7Client.S7CpuInfo();
                     if (client.GetCpuInfo(ref cpuInfo) == 0)
@@ -57,7 +54,7 @@ namespace Shrp7Client
                 isConnected = false;
                 LogMessage($"✗ Connection error: {ex.Message}");
             }
-            
+
             UpdateConnectionStatus();
         }
 
@@ -73,7 +70,7 @@ namespace Shrp7Client
             {
                 LogMessage($"Disconnect error: {ex.Message}");
             }
-            
+
             UpdateConnectionStatus();
         }
 
@@ -130,7 +127,7 @@ namespace Shrp7Client
                 LogMessage($"Reading variable: DB{dbNumber}.{offset}.{bitOffset} as {dataType}...");
 
                 object value = ReadVariableValue(dbNumber, offset, bitOffset, dataType);
-                
+
                 if (value != null)
                 {
                     txtVariableValue.Text = value.ToString();
@@ -166,7 +163,7 @@ namespace Shrp7Client
                 LogMessage($"Writing variable: DB{dbNumber}.{offset}.{bitOffset} = {valueText} ({dataType})...");
 
                 bool success = WriteVariableValue(dbNumber, offset, bitOffset, dataType, valueText);
-                
+
                 if (success)
                 {
                     LogMessage($"✓ Variable written successfully");
@@ -185,11 +182,11 @@ namespace Shrp7Client
         private void cmbVarDataType_SelectedIndexChanged(object sender, EventArgs e)
         {
             string dataType = cmbVarDataType.SelectedItem?.ToString() ?? "BOOL";
-            
+
             // Show/hide bit offset for BOOL variables
             numVarBitOffset.Visible = dataType == "BOOL";
             lblBitOffset.Visible = dataType == "BOOL";
-            
+
             // Update label text
             if (dataType == "BOOL")
             {
@@ -313,7 +310,7 @@ namespace Shrp7Client
                                     boolBuffer[0] |= (byte)(1 << bitOffset);
                                 else
                                     boolBuffer[0] &= (byte)~(1 << bitOffset);
-                                
+
                                 return client.DBWrite(dbNumber, offset, 1, boolBuffer) == 0;
                             }
                         }
@@ -435,7 +432,7 @@ namespace Shrp7Client
             btnReadDataBlock.Enabled = isConnected;
             btnReadVariable.Enabled = isConnected;
             btnWriteVariable.Enabled = isConnected;
-            
+
             lblConnectionStatus.Text = isConnected ? "✓ Connected" : "✗ Disconnected";
             lblConnectionStatus.ForeColor = isConnected ? System.Drawing.Color.Green : System.Drawing.Color.Red;
         }
@@ -456,6 +453,11 @@ namespace Shrp7Client
             }
             // No need to explicitly destroy - handled by garbage collection
             base.OnFormClosing(e);
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

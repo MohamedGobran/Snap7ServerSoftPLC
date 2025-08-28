@@ -28,6 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            splitContainer1 = new SplitContainer();
+            grpDataBlock = new GroupBox();
+            txtDataDump = new TextBox();
+            btnReadDataBlock = new Button();
+            numLength = new NumericUpDown();
+            lblLength = new Label();
+            numStartByte = new NumericUpDown();
+            lblStartByte = new Label();
+            numDBNumber = new NumericUpDown();
+            lblDBNumber = new Label();
             grpConnection = new GroupBox();
             lblConnectionStatus = new Label();
             btnDisconnect = new Button();
@@ -38,15 +48,8 @@
             lblRack = new Label();
             txtIP = new TextBox();
             lblIP = new Label();
-            grpDataBlock = new GroupBox();
-            txtDataDump = new TextBox();
-            btnReadDataBlock = new Button();
-            numLength = new NumericUpDown();
-            lblLength = new Label();
-            numStartByte = new NumericUpDown();
-            lblStartByte = new Label();
-            numDBNumber = new NumericUpDown();
-            lblDBNumber = new Label();
+            grpLog = new GroupBox();
+            txtLog = new TextBox();
             grpVariable = new GroupBox();
             btnWriteVariable = new Button();
             btnReadVariable = new Button();
@@ -61,123 +64,43 @@
             numVarDBNumber = new NumericUpDown();
             lblVarDB = new Label();
             lblVarAddress = new Label();
-            grpLog = new GroupBox();
-            txtLog = new TextBox();
-            grpConnection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)numSlot).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numRack).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             grpDataBlock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numLength).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numStartByte).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numDBNumber).BeginInit();
+            grpConnection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numSlot).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numRack).BeginInit();
+            grpLog.SuspendLayout();
             grpVariable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numVarBitOffset).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numVarOffset).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numVarDBNumber).BeginInit();
-            grpLog.SuspendLayout();
             SuspendLayout();
             // 
-            // grpConnection
+            // splitContainer1
             // 
-            grpConnection.Controls.Add(lblConnectionStatus);
-            grpConnection.Controls.Add(btnDisconnect);
-            grpConnection.Controls.Add(btnConnect);
-            grpConnection.Controls.Add(numSlot);
-            grpConnection.Controls.Add(lblSlot);
-            grpConnection.Controls.Add(numRack);
-            grpConnection.Controls.Add(lblRack);
-            grpConnection.Controls.Add(txtIP);
-            grpConnection.Controls.Add(lblIP);
-            grpConnection.Location = new Point(12, 12);
-            grpConnection.Name = "grpConnection";
-            grpConnection.Size = new Size(500, 120);
-            grpConnection.TabIndex = 0;
-            grpConnection.TabStop = false;
-            grpConnection.Text = "Connection";
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
             // 
-            // lblConnectionStatus
+            // splitContainer1.Panel1
             // 
-            lblConnectionStatus.AutoSize = true;
-            lblConnectionStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblConnectionStatus.ForeColor = Color.Red;
-            lblConnectionStatus.Location = new Point(15, 95);
-            lblConnectionStatus.Name = "lblConnectionStatus";
-            lblConnectionStatus.Size = new Size(86, 15);
-            lblConnectionStatus.TabIndex = 8;
-            lblConnectionStatus.Text = "✗ Disconnected";
+            splitContainer1.Panel1.Controls.Add(grpDataBlock);
+            splitContainer1.Panel1.Controls.Add(grpConnection);
             // 
-            // btnDisconnect
+            // splitContainer1.Panel2
             // 
-            btnDisconnect.Enabled = false;
-            btnDisconnect.Location = new Point(410, 90);
-            btnDisconnect.Name = "btnDisconnect";
-            btnDisconnect.Size = new Size(75, 23);
-            btnDisconnect.TabIndex = 7;
-            btnDisconnect.Text = "Disconnect";
-            btnDisconnect.UseVisualStyleBackColor = true;
-            btnDisconnect.Click += btnDisconnect_Click;
-            // 
-            // btnConnect
-            // 
-            btnConnect.Location = new Point(329, 90);
-            btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(75, 23);
-            btnConnect.TabIndex = 6;
-            btnConnect.Text = "Connect";
-            btnConnect.UseVisualStyleBackColor = true;
-            btnConnect.Click += btnConnect_Click;
-            // 
-            // numSlot
-            // 
-            numSlot.Location = new Point(410, 50);
-            numSlot.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
-            numSlot.Name = "numSlot";
-            numSlot.Size = new Size(75, 23);
-            numSlot.TabIndex = 5;
-            numSlot.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            // 
-            // lblSlot
-            // 
-            lblSlot.AutoSize = true;
-            lblSlot.Location = new Point(375, 52);
-            lblSlot.Name = "lblSlot";
-            lblSlot.Size = new Size(29, 15);
-            lblSlot.TabIndex = 4;
-            lblSlot.Text = "Slot:";
-            // 
-            // numRack
-            // 
-            numRack.Location = new Point(280, 50);
-            numRack.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
-            numRack.Name = "numRack";
-            numRack.Size = new Size(75, 23);
-            numRack.TabIndex = 3;
-            // 
-            // lblRack
-            // 
-            lblRack.AutoSize = true;
-            lblRack.Location = new Point(240, 52);
-            lblRack.Name = "lblRack";
-            lblRack.Size = new Size(34, 15);
-            lblRack.TabIndex = 2;
-            lblRack.Text = "Rack:";
-            // 
-            // txtIP
-            // 
-            txtIP.Location = new Point(15, 50);
-            txtIP.Name = "txtIP";
-            txtIP.Size = new Size(200, 23);
-            txtIP.TabIndex = 1;
-            txtIP.Text = "127.0.0.1";
-            // 
-            // lblIP
-            // 
-            lblIP.AutoSize = true;
-            lblIP.Location = new Point(15, 30);
-            lblIP.Name = "lblIP";
-            lblIP.Size = new Size(65, 15);
-            lblIP.TabIndex = 0;
-            lblIP.Text = "IP Address:";
+            splitContainer1.Panel2.Controls.Add(grpLog);
+            splitContainer1.Panel2.Controls.Add(grpVariable);
+            splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
+            splitContainer1.Size = new Size(1050, 536);
+            splitContainer1.SplitterDistance = 513;
+            splitContainer1.TabIndex = 4;
             // 
             // grpDataBlock
             // 
@@ -189,22 +112,24 @@
             grpDataBlock.Controls.Add(lblStartByte);
             grpDataBlock.Controls.Add(numDBNumber);
             grpDataBlock.Controls.Add(lblDBNumber);
-            grpDataBlock.Location = new Point(12, 150);
+            grpDataBlock.Dock = DockStyle.Fill;
+            grpDataBlock.Location = new Point(0, 120);
             grpDataBlock.Name = "grpDataBlock";
-            grpDataBlock.Size = new Size(500, 300);
-            grpDataBlock.TabIndex = 1;
+            grpDataBlock.Size = new Size(513, 416);
+            grpDataBlock.TabIndex = 3;
             grpDataBlock.TabStop = false;
             grpDataBlock.Text = "Data Block Dump";
             // 
             // txtDataDump
             // 
+            txtDataDump.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             txtDataDump.Font = new Font("Consolas", 9F);
-            txtDataDump.Location = new Point(15, 90);
+            txtDataDump.Location = new Point(3, 99);
             txtDataDump.Multiline = true;
             txtDataDump.Name = "txtDataDump";
             txtDataDump.ReadOnly = true;
             txtDataDump.ScrollBars = ScrollBars.Both;
-            txtDataDump.Size = new Size(470, 190);
+            txtDataDump.Size = new Size(507, 314);
             txtDataDump.TabIndex = 7;
             txtDataDump.WordWrap = false;
             // 
@@ -217,7 +142,6 @@
             btnReadDataBlock.TabIndex = 6;
             btnReadDataBlock.Text = "Read";
             btnReadDataBlock.UseVisualStyleBackColor = true;
-            btnReadDataBlock.Click += btnReadDataBlock_Click;
             // 
             // numLength
             // 
@@ -251,7 +175,7 @@
             lblStartByte.AutoSize = true;
             lblStartByte.Location = new Point(120, 52);
             lblStartByte.Name = "lblStartByte";
-            lblStartByte.Size = new Size(59, 15);
+            lblStartByte.Size = new Size(60, 15);
             lblStartByte.TabIndex = 2;
             lblStartByte.Text = "Start Byte:";
             // 
@@ -273,6 +197,131 @@
             lblDBNumber.TabIndex = 0;
             lblDBNumber.Text = "DB:";
             // 
+            // grpConnection
+            // 
+            grpConnection.Controls.Add(lblConnectionStatus);
+            grpConnection.Controls.Add(btnDisconnect);
+            grpConnection.Controls.Add(btnConnect);
+            grpConnection.Controls.Add(numSlot);
+            grpConnection.Controls.Add(lblSlot);
+            grpConnection.Controls.Add(numRack);
+            grpConnection.Controls.Add(lblRack);
+            grpConnection.Controls.Add(txtIP);
+            grpConnection.Controls.Add(lblIP);
+            grpConnection.Dock = DockStyle.Top;
+            grpConnection.Location = new Point(0, 0);
+            grpConnection.Name = "grpConnection";
+            grpConnection.Size = new Size(513, 120);
+            grpConnection.TabIndex = 2;
+            grpConnection.TabStop = false;
+            grpConnection.Text = "Connection";
+            // 
+            // lblConnectionStatus
+            // 
+            lblConnectionStatus.AutoSize = true;
+            lblConnectionStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblConnectionStatus.ForeColor = Color.Red;
+            lblConnectionStatus.Location = new Point(15, 95);
+            lblConnectionStatus.Name = "lblConnectionStatus";
+            lblConnectionStatus.Size = new Size(97, 15);
+            lblConnectionStatus.TabIndex = 8;
+            lblConnectionStatus.Text = "✗ Disconnected";
+            // 
+            // btnDisconnect
+            // 
+            btnDisconnect.Enabled = false;
+            btnDisconnect.Location = new Point(410, 90);
+            btnDisconnect.Name = "btnDisconnect";
+            btnDisconnect.Size = new Size(75, 23);
+            btnDisconnect.TabIndex = 7;
+            btnDisconnect.Text = "Disconnect";
+            btnDisconnect.UseVisualStyleBackColor = true;
+            // 
+            // btnConnect
+            // 
+            btnConnect.Location = new Point(329, 90);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(75, 23);
+            btnConnect.TabIndex = 6;
+            btnConnect.Text = "Connect";
+            btnConnect.UseVisualStyleBackColor = true;
+            // 
+            // numSlot
+            // 
+            numSlot.Location = new Point(410, 50);
+            numSlot.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
+            numSlot.Name = "numSlot";
+            numSlot.Size = new Size(75, 23);
+            numSlot.TabIndex = 5;
+            numSlot.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            // 
+            // lblSlot
+            // 
+            lblSlot.AutoSize = true;
+            lblSlot.Location = new Point(375, 52);
+            lblSlot.Name = "lblSlot";
+            lblSlot.Size = new Size(30, 15);
+            lblSlot.TabIndex = 4;
+            lblSlot.Text = "Slot:";
+            // 
+            // numRack
+            // 
+            numRack.Location = new Point(280, 50);
+            numRack.Maximum = new decimal(new int[] { 7, 0, 0, 0 });
+            numRack.Name = "numRack";
+            numRack.Size = new Size(75, 23);
+            numRack.TabIndex = 3;
+            // 
+            // lblRack
+            // 
+            lblRack.AutoSize = true;
+            lblRack.Location = new Point(240, 52);
+            lblRack.Name = "lblRack";
+            lblRack.Size = new Size(35, 15);
+            lblRack.TabIndex = 2;
+            lblRack.Text = "Rack:";
+            // 
+            // txtIP
+            // 
+            txtIP.Location = new Point(15, 50);
+            txtIP.Name = "txtIP";
+            txtIP.Size = new Size(200, 23);
+            txtIP.TabIndex = 1;
+            txtIP.Text = "127.0.0.1";
+            // 
+            // lblIP
+            // 
+            lblIP.AutoSize = true;
+            lblIP.Location = new Point(15, 30);
+            lblIP.Name = "lblIP";
+            lblIP.Size = new Size(65, 15);
+            lblIP.TabIndex = 0;
+            lblIP.Text = "IP Address:";
+            // 
+            // grpLog
+            // 
+            grpLog.Controls.Add(txtLog);
+            grpLog.Dock = DockStyle.Fill;
+            grpLog.Location = new Point(0, 200);
+            grpLog.Name = "grpLog";
+            grpLog.Size = new Size(533, 336);
+            grpLog.TabIndex = 5;
+            grpLog.TabStop = false;
+            grpLog.Text = "Log";
+            // 
+            // txtLog
+            // 
+            txtLog.Dock = DockStyle.Fill;
+            txtLog.Font = new Font("Consolas", 9F);
+            txtLog.Location = new Point(3, 19);
+            txtLog.Multiline = true;
+            txtLog.Name = "txtLog";
+            txtLog.ReadOnly = true;
+            txtLog.ScrollBars = ScrollBars.Both;
+            txtLog.Size = new Size(527, 314);
+            txtLog.TabIndex = 0;
+            txtLog.WordWrap = false;
+            // 
             // grpVariable
             // 
             grpVariable.Controls.Add(btnWriteVariable);
@@ -288,10 +337,11 @@
             grpVariable.Controls.Add(numVarDBNumber);
             grpVariable.Controls.Add(lblVarDB);
             grpVariable.Controls.Add(lblVarAddress);
-            grpVariable.Location = new Point(530, 12);
+            grpVariable.Dock = DockStyle.Top;
+            grpVariable.Location = new Point(0, 0);
             grpVariable.Name = "grpVariable";
-            grpVariable.Size = new Size(500, 200);
-            grpVariable.TabIndex = 2;
+            grpVariable.Size = new Size(533, 200);
+            grpVariable.TabIndex = 4;
             grpVariable.TabStop = false;
             grpVariable.Text = "Variable Operations";
             // 
@@ -304,7 +354,6 @@
             btnWriteVariable.TabIndex = 12;
             btnWriteVariable.Text = "Write";
             btnWriteVariable.UseVisualStyleBackColor = true;
-            btnWriteVariable.Click += btnWriteVariable_Click;
             // 
             // btnReadVariable
             // 
@@ -315,7 +364,6 @@
             btnReadVariable.TabIndex = 11;
             btnReadVariable.Text = "Read";
             btnReadVariable.UseVisualStyleBackColor = true;
-            btnReadVariable.Click += btnReadVariable_Click;
             // 
             // txtVariableValue
             // 
@@ -342,14 +390,13 @@
             cmbVarDataType.Name = "cmbVarDataType";
             cmbVarDataType.Size = new Size(100, 23);
             cmbVarDataType.TabIndex = 8;
-            cmbVarDataType.SelectedIndexChanged += cmbVarDataType_SelectedIndexChanged;
             // 
             // lblDataType
             // 
             lblDataType.AutoSize = true;
             lblDataType.Location = new Point(15, 123);
             lblDataType.Name = "lblDataType";
-            lblDataType.Size = new Size(64, 15);
+            lblDataType.Size = new Size(61, 15);
             lblDataType.TabIndex = 7;
             lblDataType.Text = "Data Type:";
             // 
@@ -360,14 +407,13 @@
             numVarBitOffset.Name = "numVarBitOffset";
             numVarBitOffset.Size = new Size(50, 23);
             numVarBitOffset.TabIndex = 6;
-            numVarBitOffset.ValueChanged += numVarBitOffset_ValueChanged;
             // 
             // lblBitOffset
             // 
             lblBitOffset.AutoSize = true;
             lblBitOffset.Location = new Point(250, 82);
             lblBitOffset.Name = "lblBitOffset";
-            lblBitOffset.Size = new Size(46, 15);
+            lblBitOffset.Size = new Size(52, 15);
             lblBitOffset.TabIndex = 5;
             lblBitOffset.Text = "Bit (0-7):";
             // 
@@ -378,7 +424,6 @@
             numVarOffset.Name = "numVarOffset";
             numVarOffset.Size = new Size(75, 23);
             numVarOffset.TabIndex = 4;
-            numVarOffset.ValueChanged += numVarOffset_ValueChanged;
             // 
             // lblOffset
             // 
@@ -398,7 +443,6 @@
             numVarDBNumber.Size = new Size(60, 23);
             numVarDBNumber.TabIndex = 2;
             numVarDBNumber.Value = new decimal(new int[] { 1, 0, 0, 0 });
-            numVarDBNumber.ValueChanged += numVarDBNumber_ValueChanged;
             // 
             // lblVarDB
             // 
@@ -418,94 +462,73 @@
             lblVarAddress.TabIndex = 0;
             lblVarAddress.Text = "Address (DB1.0.0):";
             // 
-            // grpLog
-            // 
-            grpLog.Controls.Add(txtLog);
-            grpLog.Location = new Point(530, 230);
-            grpLog.Name = "grpLog";
-            grpLog.Size = new Size(500, 220);
-            grpLog.TabIndex = 3;
-            grpLog.TabStop = false;
-            grpLog.Text = "Log";
-            // 
-            // txtLog
-            // 
-            txtLog.Font = new Font("Consolas", 9F);
-            txtLog.Location = new Point(15, 25);
-            txtLog.Multiline = true;
-            txtLog.Name = "txtLog";
-            txtLog.ReadOnly = true;
-            txtLog.ScrollBars = ScrollBars.Both;
-            txtLog.Size = new Size(470, 180);
-            txtLog.TabIndex = 0;
-            txtLog.WordWrap = false;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1050, 470);
-            Controls.Add(grpLog);
-            Controls.Add(grpVariable);
-            Controls.Add(grpDataBlock);
-            Controls.Add(grpConnection);
+            ClientSize = new Size(1050, 536);
+            Controls.Add(splitContainer1);
             Name = "Form1";
             Text = "Sharp7 PLC Client - Test Tool";
-            grpConnection.ResumeLayout(false);
-            grpConnection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)numSlot).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numRack).EndInit();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             grpDataBlock.ResumeLayout(false);
             grpDataBlock.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numLength).EndInit();
             ((System.ComponentModel.ISupportInitialize)numStartByte).EndInit();
             ((System.ComponentModel.ISupportInitialize)numDBNumber).EndInit();
+            grpConnection.ResumeLayout(false);
+            grpConnection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numSlot).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numRack).EndInit();
+            grpLog.ResumeLayout(false);
+            grpLog.PerformLayout();
             grpVariable.ResumeLayout(false);
             grpVariable.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numVarBitOffset).EndInit();
             ((System.ComponentModel.ISupportInitialize)numVarOffset).EndInit();
             ((System.ComponentModel.ISupportInitialize)numVarDBNumber).EndInit();
-            grpLog.ResumeLayout(false);
-            grpLog.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private GroupBox grpConnection;
-        private Label lblIP;
-        private TextBox txtIP;
-        private Label lblRack;
-        private NumericUpDown numRack;
-        private Label lblSlot;
-        private NumericUpDown numSlot;
-        private Button btnConnect;
-        private Button btnDisconnect;
-        private Label lblConnectionStatus;
+        private SplitContainer splitContainer1;
         private GroupBox grpDataBlock;
-        private Label lblDBNumber;
-        private NumericUpDown numDBNumber;
-        private Label lblStartByte;
-        private NumericUpDown numStartByte;
-        private Label lblLength;
-        private NumericUpDown numLength;
-        private Button btnReadDataBlock;
         private TextBox txtDataDump;
-        private GroupBox grpVariable;
-        private Label lblVarAddress;
-        private Label lblVarDB;
-        private NumericUpDown numVarDBNumber;
-        private Label lblOffset;
-        private NumericUpDown numVarOffset;
-        private Label lblBitOffset;
-        private NumericUpDown numVarBitOffset;
-        private Label lblDataType;
-        private ComboBox cmbVarDataType;
-        private Label lblValue;
-        private TextBox txtVariableValue;
-        private Button btnReadVariable;
-        private Button btnWriteVariable;
+        private Button btnReadDataBlock;
+        private NumericUpDown numLength;
+        private Label lblLength;
+        private NumericUpDown numStartByte;
+        private Label lblStartByte;
+        private NumericUpDown numDBNumber;
+        private Label lblDBNumber;
+        private GroupBox grpConnection;
+        private Label lblConnectionStatus;
+        private Button btnDisconnect;
+        private Button btnConnect;
+        private NumericUpDown numSlot;
+        private Label lblSlot;
+        private NumericUpDown numRack;
+        private Label lblRack;
+        private TextBox txtIP;
+        private Label lblIP;
         private GroupBox grpLog;
         private TextBox txtLog;
+        private GroupBox grpVariable;
+        private Button btnWriteVariable;
+        private Button btnReadVariable;
+        private TextBox txtVariableValue;
+        private Label lblValue;
+        private ComboBox cmbVarDataType;
+        private Label lblDataType;
+        private NumericUpDown numVarBitOffset;
+        private Label lblBitOffset;
+        private NumericUpDown numVarOffset;
+        private Label lblOffset;
+        private NumericUpDown numVarDBNumber;
+        private Label lblVarDB;
+        private Label lblVarAddress;
     }
 }
